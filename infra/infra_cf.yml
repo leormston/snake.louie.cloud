@@ -6,32 +6,24 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: louie-snake-cloud
-      AccessControl: PublicRead
-      OwnershipControls:
-           Rules:
-                - ObjectOwnership: BucketOwnerPreferred
+      AccessControl: Private
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
-      PublicAccessBlockConfiguration:
-        BlockPublicAcls: false
-        IgnorePublicAcls: false
-        BlockPublicPolicy: false
-        RestrictPublicBuckets: false
       Tags:
         - Key: Name
           Value: louie-snake-cloud
    
-  # S3BucketPolicy:
-  #   Type: 'AWS::S3::BucketPolicy'
-  #   Properties:
-  #     Bucket: !Ref siteBucket
-  #     PolicyDocument:
-  #       Statement:
-  #         - Effect: Allow
-  #           Principal: '*'
-  #           Action: 's3:GetObject'
-  #           Resource: !Sub 'arn:aws:s3:::${siteBucket}/*'
+  S3BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref siteBucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub 'arn:aws:s3:::${siteBucket}/*'
   
   CloudFrontDistribution:
     Type: 'AWS::CloudFront::Distribution'
