@@ -13,32 +13,8 @@ Resources:
       Tags:
         - Key: Name
           Value: louie-snake-cloud
-   
-  MyCertificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: snake.louie.cloud
-      ValidationMethod: DNS
 
-  CloudFrontDistribution:
-    Type: 'AWS::CloudFront::Distribution'
-    Properties:
-      DistributionConfig:
-        Origins:
-          - Id: S3Origin
-            DomainName: !GetAtt siteBucket.RegionalDomainName
-            S3OriginConfig:
-              OriginAccessIdentity: ''
-        Enabled: true
-        DefaultRootObject: index.html
-        Aliases:
-          - snake.louie.cloud
-        DefaultCacheBehavior:
-          ForwardedValues:
-            QueryString: false
-          TargetOriginId: S3Origin
-          ViewerProtocolPolicy: redirect-to-https
-        ViewerCertificate:
-          AcmCertificateArn: !Ref MyCertificate
-          SslSupportMethod: sni-only
-        
+Outputs:
+  snakeRegionalDomainName:
+    Value: !GetAtt siteBucket.RegionalDomainName
+    Description: The regional domain name of the snake bucket

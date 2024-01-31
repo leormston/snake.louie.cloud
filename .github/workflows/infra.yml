@@ -30,4 +30,19 @@ jobs:
         with:
           name: snake-louie-cloud-infra
           template: infra/infra_cf.yml
-          
+      
+      - name: Configure AWS credentials (Cert)
+        id: creds-cert
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - name: Deploy CloudFormation Stack 
+        id: deploy
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: snake-louie-cloud-infra
+          template: infra/cert_cf.yml
+      

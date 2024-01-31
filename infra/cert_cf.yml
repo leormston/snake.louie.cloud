@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Cloudformation Template for Cavendish's Shared Resources
+
+Resources:
+  CloudFrontDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Origins:
+          - Id: S3Origin
+            DomainName: !ImportValue snakeRegionalDomainName
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        Enabled: true
+        DefaultRootObject: index.html
+        Aliases:
+          - snake.louie.cloud
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+        ViewerCertificate:
+          AcmCertificateArn: 'arn:aws:acm:eu-west-1:744704956919:certificate/e5a6920f-3447-4afe-8ccc-6af4d9b2e0a1'
+          SslSupportMethod: sni-only
+        
