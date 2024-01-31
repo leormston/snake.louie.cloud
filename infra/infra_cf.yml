@@ -6,9 +6,48 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: louie-snake-cloud
-      AccessControl: Private
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
       VersioningConfiguration:
         Status: Enabled
       Tags:
         - Key: Name
           Value: louie-snake-cloud
+  
+  S3BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref siteBucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub 'arn:aws:s3:::${siteBucket}/*'
+  
+  CloudFrontDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Origins:
+          - Id: S3Origin
+            DomainName: !GetAtt SiteBucket.RegionalDomainName
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        Enabled: true
+        DefaultRootObject: index.html
+        DefaultCacheBehavior:
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+        Aliases:
+          - snake.louie.cloud
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+        ViewerCertificate:
+          AcmCertificateArn: 'arn:aws:acm:eu-west-1:744704956919:certificate/e5a6920f-3447-4afe-8ccc-6af4d9b2e0a1'
+          SslSupportMethod: sni-only
