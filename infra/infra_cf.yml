@@ -2,13 +2,13 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Cloudformation Template for Cavendish's Shared Resources
 
 Resources:
-  TestS3:
+  siteBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: test-s3-bucket
+      BucketName: louie-snake-cloud
       AccessControl: Private
       VersioningConfiguration:
         Status: Enabled
       Tags:
         - Key: Name
-          Value: test-s3-bucket
+          Value: louie-snake-cloud
