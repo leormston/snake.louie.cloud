@@ -8,24 +8,16 @@ on:
       - infra
 
 jobs:
-  printworkingdirectory:
-    name: Print Working Directory
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Working Directory
-        run: pwd
-  listfiles:
-    name: List Files
-    runs-on: ubuntu-latest
-    steps:
-      - name: List Files
-        run: ls -la
   cloudformation:
     name: Deploy Stack to AWS 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      
+      - name: List Contents of Directory
+        run: ls -R $GITHUB_WORKSPACE/infra
+
       - name: Configure AWS credentials
         id: creds
         uses: aws-actions/configure-aws-credentials@v1
@@ -39,4 +31,5 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: snake-louie-cloud-infra
-          template: ./infra/infra_cf.yml
+          template: $GITHUB_WORKSPACE/infra/infra_cf.yml
+          region: ${{ secrets.AWS_REGION }}
