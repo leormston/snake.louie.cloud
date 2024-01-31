@@ -12,7 +12,7 @@ jobs:
     name: Deploy Stack to AWS 
     runs-on: ubuntu-latest
     steps:
-      - name: Configue AWS credentials
+      - name: Configure AWS credentials
         id: creds
         uses: aws-actions/configure-aws-credentials@v1
         with:
