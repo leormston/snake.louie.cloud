@@ -40,9 +40,9 @@ jobs:
           aws-region: us-east-1
       
       - name: Deploy CloudFormation Stack 
-        id: deploy
+        id: cert-deploy
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: snake-louie-cloud-infra
+          name: snake-louie-cloud-infra-cert
           template: infra/cert_cf.yml
       
