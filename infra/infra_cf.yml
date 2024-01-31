@@ -46,3 +46,4 @@ Resources:
         ViewerCertificate:
           AcmCertificateArn: 'arn:aws:acm:eu-west-1:744704956919:certificate/e5a6920f-3447-4afe-8ccc-6af4d9b2e0a1'
           SslSupportMethod: sni-only
+        
