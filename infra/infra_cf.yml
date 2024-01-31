@@ -6,7 +6,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: louie-snake-cloud
-      AccessControl: PublicRead
+      # AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
