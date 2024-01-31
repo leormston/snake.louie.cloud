@@ -24,6 +24,8 @@ jobs:
     name: Deploy Stack to AWS 
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       - name: Configure AWS credentials
         id: creds
         uses: aws-actions/configure-aws-credentials@v1
