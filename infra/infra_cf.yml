@@ -33,7 +33,7 @@ Resources:
       DistributionConfig:
         Origins:
           - Id: S3Origin
-            DomainName: !GetAtt SiteBucket.RegionalDomainName
+            DomainName: !GetAtt siteBucket.RegionalDomainName
             S3OriginConfig:
               OriginAccessIdentity: ''
         Enabled: true
