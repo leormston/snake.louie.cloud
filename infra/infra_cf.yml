@@ -38,9 +38,6 @@ Resources:
               OriginAccessIdentity: ''
         Enabled: true
         DefaultRootObject: index.html
-        DefaultCacheBehavior:
-          TargetOriginId: S3Origin
-          ViewerProtocolPolicy: redirect-to-https
         Aliases:
           - snake.louie.cloud
         DefaultCacheBehavior:
