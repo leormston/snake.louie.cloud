@@ -31,5 +31,5 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: snake-louie-cloud-infra
-          template: $GITHUB_WORKSPACE/infra/infra_cf.yml
+          template: infra/infra_cf.yml
           region: ${{ secrets.AWS_REGION }}
