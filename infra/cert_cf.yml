@@ -8,7 +8,7 @@ Resources:
       DistributionConfig:
         Origins:
           - Id: S3Origin
-            DomainName: !ImportValue snakeRegionalDomainName
+            DomainName: 'louie-snake-cloud.s3.eu-west-1.amazonaws.com'
             S3OriginConfig:
               OriginAccessIdentity: ''
         Enabled: true
