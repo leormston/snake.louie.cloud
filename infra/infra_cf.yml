@@ -14,17 +14,12 @@ Resources:
         - Key: Name
           Value: louie-snake-cloud
    
-  # S3BucketPolicy:
-  #   Type: 'AWS::S3::BucketPolicy'
-  #   Properties:
-  #     Bucket: !Ref siteBucket
-  #     PolicyDocument:
-  #       Statement:
-  #         - Effect: Allow
-  #           Principal: '*'
-  #           Action: 's3:GetObject'
-  #           Resource: !Sub 'arn:aws:s3:::louie-snake-cloud/*'
-  
+  MyCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: snake.louie.cloud
+      ValidationMethod: DNS
+
   CloudFrontDistribution:
     Type: 'AWS::CloudFront::Distribution'
     Properties:
@@ -44,6 +39,6 @@ Resources:
           TargetOriginId: S3Origin
           ViewerProtocolPolicy: redirect-to-https
         ViewerCertificate:
-          AcmCertificateArn: 'arn:aws:acm:eu-west-1:744704956919:certificate/e5a6920f-3447-4afe-8ccc-6af4d9b2e0a1'
+          AcmCertificateArn: !Ref MyCertificate
           SslSupportMethod: sni-only
         
