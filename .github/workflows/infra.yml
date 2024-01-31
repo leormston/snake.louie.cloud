@@ -1,0 +1,27 @@
+name: Infra CICD 
+on:
+  pull_request:
+  push:
+    branches:
+      - main 
+      - release/*
+
+jobs:
+  cluster:
+    name: Deploy Stack to AWS 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configue AWS credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy CloudFormation Stack 
+        id: deploy
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: snake-louie-cloud-infra
+          template: ./infra/infra_cf.yml

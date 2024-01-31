@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Cloudformation Template for Cavendish's Shared Resources
+
+Resources:
+  TestS3:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: test-s3-bucket
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Name
+          Value: test-s3-bucket
