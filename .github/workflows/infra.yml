@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main 
-      - release/*
-      - infra
-
 jobs:
   cloudformation:
     name: Deploy Stack to AWS 
@@ -32,4 +29,4 @@ jobs:
         with:
           name: snake-louie-cloud-infra
           template: infra/infra_cf.yml
-          region: ${{ secrets.AWS_REGION }}
+          
