@@ -6,7 +6,7 @@ on:
       - main 
       - infra
 jobs:
-  cloudformation:
+  cloudformation-infra:
     name: Deploy Stack to AWS 
     runs-on: ubuntu-latest
     steps:
@@ -28,9 +28,14 @@ jobs:
         id: deploy
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
+          no-fail-on-empty-changeset: "1"
           name: snake-louie-cloud-infra
           template: infra/infra_cf.yml
-      
+
+  cloudformation-cert:
+    name: Deploy Stack to AWS (Cert)
+    runs-on: ubuntu-latest
+    steps:
       - name: Configure AWS credentials (Cert)
         id: creds-cert
         uses: aws-actions/configure-aws-credentials@v1
@@ -44,5 +49,6 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: snake-louie-cloud-infra-cert
+          no-fail-on-empty-changeset: "1"
           template: infra/cert_cf.yml
       
