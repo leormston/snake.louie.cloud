@@ -37,8 +37,8 @@ Resources:
     Properties:
       HostedZoneId: 'Z05745243PIX3M5TE1VR4' 
       Name: snake.louie.cloud
-      Type: A
+      Type: CNAME
       TTL: 60
       ResourceRecords:
-        - !GetAtt CloudFrontDistribution.DomainName
+      - !GetAtt CloudFrontDistribution.DomainName
         
