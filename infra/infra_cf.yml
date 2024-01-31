@@ -13,7 +13,7 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
-      BlockPublicAccess:
+      PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         IgnorePublicAcls: false
         BlockPublicPolicy: false
