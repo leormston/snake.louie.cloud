@@ -13,10 +13,15 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
+      BlockPublicAccess:
+        BlockPublicAcls: false
+        IgnorePublicAcls: false
+        BlockPublicPolicy: false
+        RestrictPublicBuckets: false
       Tags:
         - Key: Name
           Value: louie-snake-cloud
-  
+   
   # S3BucketPolicy:
   #   Type: 'AWS::S3::BucketPolicy'
   #   Properties:
