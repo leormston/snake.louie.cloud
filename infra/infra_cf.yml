@@ -7,6 +7,9 @@ Resources:
     Properties:
       BucketName: louie-snake-cloud
       AccessControl: PublicRead
+      OwnershipControls:
+           Rules:
+                - ObjectOwnership: BucketOwnerPreferred
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
