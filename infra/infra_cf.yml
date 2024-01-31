@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Cloudformation Template for Cavendish's Shared Resources
+
+Resources:
+  siteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: louie-snake-cloud
+      AccessControl: Private
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+      Tags:
+        - Key: Name
+          Value: louie-snake-cloud
+
+# Outputs:
+#   snakeRegionalDomainName:
+#     Value: !GetAtt siteBucket.RegionalDomainName
+#     Description: The regional domain name of the snake bucket

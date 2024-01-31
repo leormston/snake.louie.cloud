@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Cloudformation Template for Cavendish's Shared Resources
+
+Resources:
+
+  MyCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: snake.louie.cloud
+      ValidationMethod: DNS
+      SubjectAlternativeNames:
+        - '*.snake.louie.cloud'
+  CloudFrontDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Origins:
+          - Id: S3Origin
+            DomainName: 'louie-snake-cloud.s3.eu-west-1.amazonaws.com'
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        Enabled: true
+        DefaultRootObject: index.html
+        Aliases:
+          - snake.louie.cloud
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+        ViewerCertificate:
+          AcmCertificateArn: !Ref MyCertificate
+          SslSupportMethod: sni-only
+
+  MyDNSRecordSet:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: 'Z05745243PIX3M5TE1VR4' 
+      Name: snake.louie.cloud
+      Type: CNAME
+      TTL: 60
+      ResourceRecords:
+      - !GetAtt CloudFrontDistribution.DomainName
+        
