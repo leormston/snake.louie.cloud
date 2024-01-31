@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: List Contents of Directory
-        run: ls -R $GITHUB_WORKSPACE/infra
+        run: ls
 
       - name: Configure AWS credentials
         id: creds
