@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main 
+      - infra
 jobs:
   cloudformation:
     name: Deploy Stack to AWS 
