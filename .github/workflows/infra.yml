@@ -8,7 +8,19 @@ on:
       - infra
 
 jobs:
-  cluster:
+  printworkingdirectory:
+    name: Print Working Directory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Working Directory
+        run: pwd
+  listfiles:
+    name: List Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: List Files
+        run: ls -la
+  cloudformation:
     name: Deploy Stack to AWS 
     runs-on: ubuntu-latest
     steps:
