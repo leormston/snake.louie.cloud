@@ -6,15 +6,28 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: louie-snake-cloud
-      AccessControl: Private
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
       Tags:
         - Key: Name
           Value: louie-snake-cloud
 
-# Outputs:
-#   snakeRegionalDomainName:
-#     Value: !GetAtt siteBucket.RegionalDomainName
-#     Description: The regional domain name of the snake bucket
+  siteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref siteBucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource: !Join ['', ['arn:aws:s3:::', !Ref siteBucket, '/*']]
+            Principal:
+              AWS: '*'
+        Version: '2012-10-17'
