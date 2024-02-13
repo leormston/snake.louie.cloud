@@ -1,7 +1,8 @@
 import React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Board() {
+    const [score, setScore] = useState(0);
     var blockSize = 25;
     var rows = 20;
     var cols = 20;
@@ -19,16 +20,6 @@ export default function Board() {
     var foodY = blockSize * 15;
 
     useEffect(() => {
-        // const board = boardRef.current;
-        // const context = board.getContext('2d');
-        // contextRef.current = context;
-        // board.height = blockSize * rows;
-        // board.width = blockSize * cols;
-
-        // document.addEventListener('keydown', changeDirection);
-
-        // setInterval(update, 1000/5);
-
         const board = boardRef.current;
         const context = board.getContext('2d');
         contextRef.current = context;
@@ -43,16 +34,6 @@ export default function Board() {
             document.removeEventListener('keydown', changeDirection);
         }
     }, []);
-
-    // function gameStart() {
-    //     board = document.getElementById('board');
-    //     board.height = blockSize * rows;
-    //     board.width = blockSize * cols;
-    //     context = board.getContext('2d');
-    //     placeFood();
-    //     document.addEventListener('keydown', changeDirection);
-    //     setInterval(update, 1000/5);
-    // }
 
     function changeDirection (event) {
         if (event.code === 'ArrowUp') {
@@ -79,11 +60,28 @@ export default function Board() {
 
     function update() {
         const context = contextRef.current;
+        if (snakeX === foodX && snakeY === foodY) {
+            placeFood();
+            setScore(prevScore => prevScore + 1);
+        }
         context.fillStyle = 'black';
         context.fillRect(0, 0, boardRef.current.width, boardRef.current.height);
 
         context.fillStyle = "blue";
         context.fillRect(foodX, foodY, blockSize, blockSize);
+        
+        if (snakeX < 0) {
+            snakeX = blockSize * (cols - 1);
+        }
+        if (snakeY < 0) {
+            snakeY = blockSize * (rows - 1);
+        }
+        if (snakeX >= blockSize * cols) {
+            snakeX = 0;
+        }
+        if (snakeY >= blockSize * rows) {
+            snakeY = 0;
+        }
         
         context.fillStyle= "lime";
         snakeX += velocityX * blockSize;
@@ -98,6 +96,9 @@ export default function Board() {
     }
     
     return (
-        <canvas id = "board" ref={boardRef}></canvas>
+        <div>
+            <canvas id = "board" ref={boardRef}></canvas>
+            <h2>Score: {score}</h2>
+        </div>
     );
 }
