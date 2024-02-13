@@ -128,7 +128,7 @@ export default function Board() {
                 if (snakeX === snakeBody[i][0] && snakeY === snakeBody[i][1]) {
                     setGameOver(true);
                     jgameOver = true;
-                    alert("Game Over! You ate yourself! Your score is " + { score });
+                    alert("Game Over! You ate yourself! Your score is " + jscore);
                 }
             }
         }
@@ -139,7 +139,6 @@ export default function Board() {
         foodX = Math.floor(Math.random() * cols) * blockSize;
         foodY = Math.floor(Math.random() * rows) * blockSize;
     }
-
     return (
         <div>
             <canvas id="board" ref={boardRef}></canvas>
@@ -149,12 +148,13 @@ export default function Board() {
                     <button onClick={() => window.location.reload()}>Play Again</button>
                 </div>
             )}
+            {!gameOver && (
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <h2>Score: {score}</h2>
+                    <h2>{pause ? 'paused' : 'playing'}</h2>
+                </div>
+            )}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span><h2>Score: {score}</h2></span>
-                <span>{pause ? <h2>paused</h2> : <h2>playing</h2>}</span>
-            </div>
         </div>
-
     );
 }
