@@ -7,10 +7,10 @@ function App() {
       <body style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", fontFamily: "Arial, sans-serif"}}>
         <div>
             <h1>Snake Game</h1>
-            <hr/>
+            <hr/> 
             <Board/>
         </div>
-    </body>
+     </body>
     </div>
   );
 }
