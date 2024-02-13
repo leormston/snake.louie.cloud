@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 export default function Board() {
     const [score, setScore] = useState(0);
     const [pause, setPause] = useState(false);
-    const [walls, setWalls] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     var blockSize = 25;
     var rows = 20;
@@ -41,8 +40,8 @@ export default function Board() {
         return () => {
             clearInterval(gameInterval);
             document.removeEventListener('keydown', changeDirection);
-        }
-    }, []);
+        }// eslint-disable-next-line
+    }, [blockSize, rows, cols]);
 
     function changeDirection(event) {
         if (event.code === 'ArrowUp' && velocityY !== 1 && !pause) {
@@ -62,12 +61,10 @@ export default function Board() {
             velocityY = 0;
         }
         if (event.code === 'Escape') {
-            // velocityX = 0;
-            // velocityY = 0;
             setPause(true);
             jpause = true;
         }
-        if (event.code == 'Space') {
+        if (event.code === 'Space') {
             setPause(false);
             jpause = false;
         }
@@ -126,12 +123,12 @@ export default function Board() {
             jgameOver = true;
             alert("Game Over! You hit a wall! Your score is " + jscore);
         }
-        if (pause == false) {
+        if (pause === false) {
             for (let i = 0; i < snakeBody.length; i++) {
                 if (snakeX === snakeBody[i][0] && snakeY === snakeBody[i][1]) {
                     setGameOver(true);
                     jgameOver = true;
-                    alert("Game Over! You ate yourself! Your score is " + { score });
+                    alert("Game Over! You ate yourself! Your score is " + jscore);
                 }
             }
         }
@@ -142,7 +139,6 @@ export default function Board() {
         foodX = Math.floor(Math.random() * cols) * blockSize;
         foodY = Math.floor(Math.random() * rows) * blockSize;
     }
-
     return (
         <div>
             <canvas id="board" ref={boardRef}></canvas>
@@ -152,12 +148,13 @@ export default function Board() {
                     <button onClick={() => window.location.reload()}>Play Again</button>
                 </div>
             )}
+            {!gameOver && (
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <h2>Score: {score}</h2>
+                    <h2>{pause ? 'paused' : 'playing'}</h2>
+                </div>
+            )}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span><h2>Score: {score}</h2></span>
-                <span>{pause ? <h2>paused</h2> : <h2>playing</h2>}</span>
-            </div>
         </div>
-
     );
 }
