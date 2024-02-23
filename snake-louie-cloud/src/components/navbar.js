@@ -124,18 +124,19 @@ export default function Navbar(props) {
                             localStorage.setItem("theme", props.cssTheme === "dark" ? "light" : "dark")
                             props.setCssTheme(props.cssTheme === "dark" ? "light" : "dark")
                         }
-                        } size="small" />
+                        } size="medium" />
                         <Typography
                             variant="h6"
                             noWrap
                             component="a"
                             sx={{
-                                fontWeight: 300,
-                                fontSize: "0.7rem",
+                                fontWeight: 500,
+                                fontSize: "1rem",
                                 letterSpacing: '.05rem',
                                 color: 'inherit',
                                 textDecoration: 'none',
                             }}
+                            style={{ "height": "50px", "lineHeight": "50px", "marginLeft": "10px", "marginRight": "10px", "textAlign": "center", "verticalAlign": "middle" }}
                         >
                             {props.cssTheme}
                         </Typography>

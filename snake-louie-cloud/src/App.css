@@ -4,3 +4,41 @@
   margin: 0 auto;
   
 }
+.dark {
+  background-color: #282c34;
+  color: white;
+}
+
+.light {
+  background-color: #d3c9d3;
+  color: black;
+}
+
+.navStyle {
+
+  color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.darkText {
+  color: white !important;
+} 
+
+.lightText {
+  color: black !important;
+}
+
+.innerBody {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 1vmin);
+  color: white;
+  padding: 40px;
+  padding-top: 100px;
+
+}
