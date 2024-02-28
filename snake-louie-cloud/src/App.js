@@ -24,13 +24,17 @@ function App() {
     <div className="App">
       <ThemeProvider theme={cssTheme === "light" ? lightTheme : darkTheme}>
       <Navbar theme={cssTheme === "light" ? lightTheme : darkTheme} cssTheme={cssTheme} setCssTheme={setCssTheme}/>
+      <div className={cssTheme}>
+
+      
       <body style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", fontFamily: "Arial, sans-serif"}}>
-        <div>
+        <div >
             <h1>Snake Game</h1>
             <hr/> 
             <Board/>
         </div>
       </body>
+      </div>
       </ThemeProvider>
     </div>
   );
