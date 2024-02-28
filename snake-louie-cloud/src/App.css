@@ -42,3 +42,24 @@
   padding-top: 100px;
 
 }
+
+.footer {
+
+  left: 0;
+  bottom: 0;
+
+  min-height: 200px;
+  background-color: #383040;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  vertical-align: auto;
+  padding: 20px;
+}
+
+.g-link {
+  color: #b7b7b7;
+  text-decoration: none;
+}

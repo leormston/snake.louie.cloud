@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Board from './components/board';
 import Navbar from './components/navbar';
+import Footer from './components/footer';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
@@ -34,6 +35,7 @@ function App() {
             <Board/>
         </div>
       </body>
+      <Footer/>
       </div>
       </ThemeProvider>
     </div>
